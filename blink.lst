@@ -1,0 +1,58 @@
+
+blink.elf:     file format elf32-avr
+
+
+Disassembly of section .text:
+
+00000000 <__ctors_end>:
+   0:	11 24       	eor	r1, r1
+   2:	1f be       	out	0x3f, r1	; 63
+   4:	cf ef       	ldi	r28, 0xFF	; 255
+   6:	d8 e0       	ldi	r29, 0x08	; 8
+   8:	de bf       	out	0x3e, r29	; 62
+   a:	cd bf       	out	0x3d, r28	; 61
+   c:	80 e8       	ldi	r24, 0x80	; 128
+   e:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <__TEXT_REGION_LENGTH__+0x7e0061>
+  12:	10 92 61 00 	sts	0x0061, r1	; 0x800061 <__TEXT_REGION_LENGTH__+0x7e0061>
+  16:	25 9a       	sbi	0x04, 5	; 4
+  18:	2d 98       	cbi	0x05, 5	; 5
+  1a:	0e 94 12 00 	call	0x24	; 0x24 <toggle>
+  1e:	0e 94 17 00 	call	0x2e	; 0x2e <delay>
+  22:	fb cf       	rjmp	.-10     	; 0x1a <__ctors_end+0x1a>
+
+00000024 <toggle>:
+  24:	85 b1       	in	r24, 0x05	; 5
+  26:	90 e2       	ldi	r25, 0x20	; 32
+  28:	89 27       	eor	r24, r25
+  2a:	85 b9       	out	0x05, r24	; 5
+  2c:	08 95       	ret
+
+0000002e <delay>:
+  2e:	59 e2       	ldi	r21, 0x29	; 41
+  30:	66 e9       	ldi	r22, 0x96	; 150
+  32:	7f e7       	ldi	r23, 0x7F	; 127
+  34:	7a 95       	dec	r23
+  36:	f1 f7       	brne	.-4      	; 0x34 <delay+0x6>
+  38:	6a 95       	dec	r22
+  3a:	e1 f7       	brne	.-8      	; 0x34 <delay+0x6>
+  3c:	5a 95       	dec	r21
+  3e:	d1 f7       	brne	.-12     	; 0x34 <delay+0x6>
+  40:	08 95       	ret
+
+00000042 <delay2>:
+  42:	22 e5       	ldi	r18, 0x52	; 82
+  44:	3b e2       	ldi	r19, 0x2B	; 43
+  46:	40 e0       	ldi	r20, 0x00	; 0
+  48:	4a 95       	dec	r20
+  4a:	f1 f7       	brne	.-4      	; 0x48 <delay2+0x6>
+  4c:	3a 95       	dec	r19
+  4e:	e1 f7       	brne	.-8      	; 0x48 <delay2+0x6>
+  50:	2a 95       	dec	r18
+  52:	d1 f7       	brne	.-12     	; 0x48 <delay2+0x6>
+  54:	08 95       	ret
+
+00000056 <delay>:
+  56:	af ef       	ldi	r26, 0xFF	; 255
+  58:	aa 95       	dec	r26
+  5a:	f1 f7       	brne	.-4      	; 0x58 <delay+0x2>
+  5c:	08 95       	ret
